@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cityinfo.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.cityinfo.model.User" >
+    <id column="user_Id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_Name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_Pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="user_Type" property="userType" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_Id, user_Name, user_Pwd, user_Type, createDate, updateDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_Id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_user
+    where user_Id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cityinfo.model.User" >
+    insert into sys_user (user_Id, user_Name, user_Pwd, 
+      user_Type, createDate, updateDate
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cityinfo.model.User" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_Id,
+      </if>
+      <if test="userName != null" >
+        user_Name,
+      </if>
+      <if test="userPwd != null" >
+        user_Pwd,
+      </if>
+      <if test="userType != null" >
+        user_Type,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cityinfo.model.User" >
+    update sys_user
+    <set >
+      <if test="userName != null" >
+        user_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_Pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_Type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_Id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cityinfo.model.User" >
+    update sys_user
+    set user_Name = #{userName,jdbcType=VARCHAR},
+      user_Pwd = #{userPwd,jdbcType=VARCHAR},
+      user_Type = #{userType,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where user_Id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,4 +1,4 @@
-package com.cityonfo.utils;
+package com.cityinfo.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -71,7 +71,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 格式化日期
+	 * 格式化日�?
 	 * 
 	 * @return
 	 */

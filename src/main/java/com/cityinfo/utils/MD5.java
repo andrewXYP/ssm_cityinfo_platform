@@ -1,4 +1,4 @@
-package com.cityonfo.utils;
+package com.cityinfo.utils;
 
 import java.security.MessageDigest;
 

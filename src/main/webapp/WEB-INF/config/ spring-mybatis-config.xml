@@ -95,7 +95,7 @@
 	-->
 	<aop:config>
 		<aop:pointcut id="pointcut"
-					  expression="execution(* com.ssm.cityinfo.*.service.impl..*.*(..)) " />
+					  expression="execution(* com.cityinfo.*.service.impl..*.*(..)) " />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="pointcut" />
 	</aop:config>
 

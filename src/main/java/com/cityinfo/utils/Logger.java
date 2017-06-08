@@ -1,4 +1,4 @@
-package com.cityonfo.utils;
+package com.cityinfo.utils;
 
 
 public class Logger {
@@ -7,14 +7,14 @@ public class Logger {
 
 	
 	/**
-	 * 构造方法，初始化Log4j的日志对象
+	 * 构�?�方法，初始化Log4j的日志对�?
 	 */
 	private Logger(org.apache.log4j.Logger log4jLogger) {
 		logger = log4jLogger;
 	}
 
 	/**
-	 * 获取构造器，根据类初始化Logger对象
+	 * 获取构�?�器，根据类初始化Logger对象
 	 * 
 	 * @param Class
 	 *            Class对象
@@ -25,10 +25,10 @@ public class Logger {
 	}
 
 	/**
-	 * 获取构造器，根据类名初始化Logger对象
+	 * 获取构�?�器，根据类名初始化Logger对象
 	 * 
 	 * @param String
-	 *            类名字符串
+	 *            类名字符�?
 	 * @return Logger对象
 	 */
 	public static Logger getLogger(String loggerName) {

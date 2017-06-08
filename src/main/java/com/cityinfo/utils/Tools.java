@@ -1,4 +1,4 @@
-package com.cityonfo.utils;
+package com.cityinfo.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package com.cityonfo.controller;
+package com.cityinfo.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,10 +7,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cityonfo.model.Page;
-import com.cityonfo.utils.Logger;
-import com.cityonfo.utils.PageData;
-import com.cityonfo.utils.UuidUtil;
+import com.cityinfo.model.Page;
+import com.cityinfo.utils.Logger;
+import com.cityinfo.utils.PageData;
+import com.cityinfo.utils.UuidUtil;
 
 
 

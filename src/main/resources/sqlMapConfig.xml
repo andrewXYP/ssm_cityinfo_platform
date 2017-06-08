@@ -8,6 +8,6 @@
 
 	</typeAliases>
 	<mappers>
-		
+		<mapper resource="com/cityinfo/sqlmap/userMapper.xml"/>
 	</mappers>
 </configuration>

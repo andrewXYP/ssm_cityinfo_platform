@@ -1,8 +1,8 @@
-package com.cityonfo.model;
+package com.cityinfo.model;
 
-import com.cityonfo.utils.Const;
-import com.cityonfo.utils.PageData;
-import com.cityonfo.utils.Tools;
+import com.cityinfo.utils.Const;
+import com.cityinfo.utils.PageData;
+import com.cityinfo.utils.Tools;
 
 public class Page {
 
