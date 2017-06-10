@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:security="http://www.springframework.org/schema/security"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<!-- <security:http pattern="/" security="none" /> -->
-	
+
 	<security:global-method-security secured-annotations="enabled" />
 
-	<security:http 
-		realm="Welcome to Archetype Created Web Application">
-		
+	<security:http
+			realm="Welcome to Archetype Created Web Application">
+
 		<security:http-basic />
-		
-		<!-- username-parameter default value is username --> 
-		<!-- password-parameter default value is password --> 
+
+		<!-- username-parameter default value is username -->
+		<!-- password-parameter default value is password -->
 		<security:form-login
-			username-parameter="email"
-			password-parameter="password"
-			default-target-url="/"
-			login-page="/login"
-			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/login"/>
-			
-		<!-- token-validity 30 days -->  
+				username-parameter="email"
+				password-parameter="password"
+				default-target-url="/"
+				login-page="/login"
+				login-processing-url="/j_spring_security_check"
+				authentication-failure-url="/login"/>
+
+		<!-- token-validity 30 days -->
 		<!-- remember-me-parameter default value is _spring_security_remember_me -->
-		<security:remember-me data-source-ref="dataSource" 
-			token-validity-seconds="2592000" 
-			remember-me-parameter="rememberMe"/>	
-		
+		<security:remember-me data-source-ref="dataSource"
+							  token-validity-seconds="2592000"
+							  remember-me-parameter="rememberMe"/>
+
 		<!-- <security:remember-me use-secure-cookie="true"/> -->
-		
+
 		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
-		
+
 		<security:intercept-url pattern="/password/change" access="hasRole('ROLE_XYZ')" requires-channel="any"/>
 		<security:intercept-url pattern="/user/**" access="hasRole('ROLE_XYZ')" requires-channel="any"/>
 
 		<!-- j_spring_security_logout -->
-		<security:logout logout-url="/j_spring_security_logout" logout-success-url="/" 
-			invalidate-session="true" />
+		<security:logout logout-url="/j_spring_security_logout" logout-success-url="/"
+						 invalidate-session="true" />
 		<security:csrf disabled="true" />
 	</security:http>
 
@@ -52,16 +52,16 @@
 			<security:password-encoder hash="md5">
 				<security:salt-source user-property="username" />
 			</security:password-encoder>
-			
-			<security:jdbc-user-service 
-				data-source-ref="dataSource" 
-				users-by-username-query="select email username, password, case account_locked when 'Y' then 0 else 1 end enabled from t_user where email = ?"
-				authorities-by-username-query="select email username, role authority from t_user where email = ?"
-				role-prefix="ROLE_"/>
+
+			<security:jdbc-user-service
+					data-source-ref="dataSource"
+					users-by-username-query="select email username, password, case account_locked when 'Y' then 0 else 1 end enabled from t_user where email = ?"
+					authorities-by-username-query="select email username, role authority from t_user where email = ?"
+					role-prefix="ROLE_"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+
 	<!-- add authentication-failure-handler-ref="authenticationFailureandler" to security:form-login -->
 	<!-- <bean id="authenticationFailureandler" class="com.shms.qzcj.handler.LoginFailureHandler" /> -->
-	
+
 </beans>	

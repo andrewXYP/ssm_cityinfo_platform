@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cityinfo.dao.UserMapper" >
+  <cache eviction="LRU" type="com.cityinfo.cache.RedisCache" readOnly="false" size="1024"/>
   <resultMap id="BaseResultMap" type="com.cityinfo.model.User" >
     <id column="user_Id" property="userId" jdbcType="VARCHAR" />
     <result column="user_Name" property="userName" jdbcType="VARCHAR" />
@@ -9,20 +10,21 @@
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     user_Id, user_Name, user_Pwd, user_Type, createDate, updateDate
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="true">
     select 
     <include refid="Base_Column_List" />
     from sys_user
     where user_Id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from sys_user
     where user_Id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cityinfo.model.User" >
+  <insert id="insert" parameterType="com.cityinfo.model.User" flushCache="true">
     insert into sys_user (user_Id, user_Name, user_Pwd, 
       user_Type, createDate, updateDate
       )
@@ -30,7 +32,7 @@
       #{userType,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cityinfo.model.User" >
+  <insert id="insertSelective" parameterType="com.cityinfo.model.User" flushCache="true">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -73,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cityinfo.model.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.cityinfo.model.User" flushCache="true">
     update sys_user
     <set >
       <if test="userName != null" >
@@ -94,7 +96,7 @@
     </set>
     where user_Id = #{userId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cityinfo.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.cityinfo.model.User" flushCache="true">
     update sys_user
     set user_Name = #{userName,jdbcType=VARCHAR},
       user_Pwd = #{userPwd,jdbcType=VARCHAR},
@@ -103,4 +105,8 @@
       updateDate = #{updatedate,jdbcType=TIMESTAMP}
     where user_Id = #{userId,jdbcType=VARCHAR}
   </update>
+  <!---->
+  <select id="getUsers" resultMap="BaseResultMap" useCache="true">
+    SELECT <include refid="Base_Column_List" /> from sys_user
+  </select>
 </mapper>
